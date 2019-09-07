@@ -19,7 +19,18 @@ class Course < ApplicationRecord
   end
 
   def replaced_name
-    name.include?('/') ? name.gsub('/', ' / ') : name
+    temp_name = name
+
+    return temp_name if temp_name.nil?
+
+    # ['/', ':'].each do |symbol|
+    #   temp_name = temp_name.include?(symbol) ? name.gsub(symbol, " #{symbol} ") : name
+    # end
+
+    temp_name = temp_name.gsub('/', ' / ')
+    temp_name = temp_name.gsub(':', ' : ')
+
+    temp_name
   end
 
   def dash_if_empty(attribute)
